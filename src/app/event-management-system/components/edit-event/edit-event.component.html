@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<div fxLayoutAlign="center center" id="flex" [class.style_change]="style_variable">
+
+  <div class="alert alert-dismissible alert-success" *ngIf="updated">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Well done! Event Sucessfully Updated</strong>.
+  </div>
+  <div class="alert alert-dismissible alert-danger" *ngIf="errorOccurs">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> {{errorMsg}} and try submitting again.
+  </div>
+
+  <div *ngIf="loadData">
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loadData && previewUrl==null">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap! No Event found for this {{eventId}} id</strong>.
+  </div>
+  <mat-card fxFlex="30" *ngIf="previewUrl!=null">
+
+
+    <mat-card-header>
+      <mat-card-title class="text-center">Edit Event</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form name="form" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label for="thoughtPaper">Event Image</label>
+            <input type="file" required class="form-control-file" name="eventImage" accept="image/*" #inputImageFile
+              aria-describedby="fileHelp" (change)="showPreview($event)" />
+            <small id="fileHelp" class="form-text text-muted">Select Only image file.</small>
+
+          </div>
+          <div class="image-preview mb-3 form-group" *ngIf="previewUrl && previewUrl !== ''" style="padding: 0%;">
+            <img mat-card-image [src]="previewUrl" class="responsive-image" />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend></legend>
+          <input matInput formControlName="eventId" type="number" class="form-control" name="eventId" hidden>
+          <div class="form-group">
+            <label for="eventTitle">Event Title</label>
+            <input matInput formControlName="eventTitle" type="text" class="form-control" name="eventTitle"
+              placeholder="Enter Event Title">
+          </div>
+          <div class="form-group">
+            <label for="eventDescription">Event Description</label>
+            <textarea matInput formControlName="eventDescription" class="form-control" name="eventDesc" rows="3"
+              placeholder="Enter Event Description">
+                      </textarea>
+          </div>
+          <div class="form-group">
+            <label for="eventCategory">Select Event Category</label>
+
+            <select formControlName="eventCategory" name="category" class="form-control">
+              <option disabled selected value>Select Category</option>
+              <option *ngFor="let category of categoryList" [value]="category">{{category}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="eventLocation">Select Location</label>
+
+            <select formControlName="eventLcation" name="location" class="form-control">
+              <option disabled selected value>Select Location</option>
+              <option *ngFor="let location of locationList" [value]="location">{{location}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="videoUrl">Event YouTube Embedded Video ID</label>
+            <input matInput formControlName="eventVideoUrl" class="form-control" name="videoUrl"
+              placeholder="Enter Video Url ID">
+          </div>
+          <div class="form-group">
+            <label for="thoughtPaper">Event Thought Paper</label>
+            <input type="file" required class="form-control-file" accept="application/msword, application/vnd.ms-powerpoint,
+                      text/plain, application/pdf" name="thoughtPaper" #inputThoughtPaperFile
+              aria-describedby="fileHelp" (change)="onChangeFile($event)">
+            <small id="fileHelp" class="form-text text-muted">Select Only doc/pdf file.</small>
+          </div>
+
+          <div class=" form-group" *ngIf="previewDocUrl && previewDocUrl !== ''" style="padding: 0%;">
+            <a [href]="previewDocUrl">View Document</a>
+          </div>
+          <div class="btn-group btn-group-toggle btn-lg btn-block" data-toggle="buttons">
+            <button type="submit" class="btn btn-primary"
+              [disabled]="eventForm.invalid || imagefileData==null || thoughtPaperData==null ">SUBMIT</button>
+
+          </div>
+        </fieldset>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

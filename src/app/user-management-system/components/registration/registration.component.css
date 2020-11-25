@@ -1,0 +1,36 @@
+.mat-card-cvr{
+  padding-top: 2%;
+  width:100%; text-align:center;
+  background-color: rgb(250, 248, 248);
+}
+
+.example-card{
+  margin:0 auto; width: 35%; display:inline-block;
+  border: 1px solid lightgray;}
+
+mat-form-field {
+    width: 80%;
+}
+
+button {
+    width:80%;
+    color: white;
+}
+
+mat-card-title {
+    padding-left: 40%;
+}
+mat-card-footer {
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+/* .loginop {padding-top: 3%; width:100%; text-align:center; position:fixed;} */
+
+.my-card {margin:0 auto; width: 35%; display:inline-block; border: 1px solid lightgray;
+   text-align:center;
+}
+
+a {
+  text-decoration: none;
+}

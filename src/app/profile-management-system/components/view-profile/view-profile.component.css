@@ -1,0 +1,62 @@
+
+  .basic-container {
+    padding: 30px;
+  }
+  .version-info {
+    font-size: 8pt;
+    float: right;
+    margin: 8px;
+  }
+.profile-image{
+    border-radius: 50%;
+    margin: 10px;
+    max-height: 230px;
+    max-width: 230px;
+}
+
+.container{
+padding-top: 2pc;
+}
+
+.profile{
+    font-family: 'Times New Roman', Times, serif;
+text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+#col-center{
+    text-align: center;
+}
+#col-left{
+    text-align: left;
+}
+
+.card-color{
+    background-color: rgb(59, 175, 230);
+}
+.about-card {
+
+    font-size: large;
+
+}
+
+.edit-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+
+#contentId{
+    background-image: url("../../../../assets/img/user-profile-bg.jpg");
+}
+
+
+.style_change{
+  margin-top: 100px;
+}
+
+i{
+  cursor: pointer;
+}

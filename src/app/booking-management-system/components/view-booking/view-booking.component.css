@@ -1,0 +1,19 @@
+.card {
+  margin-left: 75px;
+  margin-right: 75px;
+  margin-top: 45px;
+  margin-bottom: 75px;
+}
+.box:hover {
+  box-shadow: 0 0 30px rgba(33,33,33,.2);
+}
+p{
+  text-align: center;
+  font-size: 30px;
+}
+#flex{
+  margin-top: 1pc;
+}
+.style_change{
+  margin-top: 100px;
+}

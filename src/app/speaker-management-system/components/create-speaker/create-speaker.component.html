@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<div fxLayoutAlign="center center" id="flex" [class.style_change]="style_variable">
+  <mat-card fxFlex="30">
+
+    <div class="alert alert-dismissible alert-success" *ngIf="added">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Well done! Speaker Sucessfully Added</strong>.
+    </div>
+    <div class="alert alert-dismissible alert-danger" *ngIf="errorOccurs">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Oh snap!</strong> {{errorMsg}} and try submitting again.
+    </div>
+    <mat-card-header>
+      <mat-card-title class="text-center">Add Speaker</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="!added && btnClick">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+
+      <form name="form" #f="ngForm">
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label for="image">Speaker Image</label>
+            <input type="file" required class="form-control-file" name="speakerImage" accept="image/*"
+              aria-describedby="fileHelp" #inputImageFile (change)="showPreview($event)" />
+            <small id="fileHelp" class="form-text text-muted">Select Only image file.</small>
+
+          </div>
+
+          <div class="image-preview mb-3 form-group" *ngIf="previewUrl && previewUrl !== ''" style="padding: 0%;">
+            <img mat-card-image [src]="previewUrl" class="responsive-image" />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label for="speakerName">Speaker Name</label>
+            <input [(ngModel)]="speaker.speakerName" #speakerName="ngModel" matInput #speakerName="ngModel"
+              type="text" class="form-control" name="SpeakerName" id="speakerName" minlength="2"
+              pattern="([a-zA-Z]+\s)*[a-zA-Z]+" placeholder="Enter Speaker Name " required
+              class="form-control" placeholder="Enter Speaker Name ">
+
+              <div *ngIf="speakerName.invalid && (speakerName.dirty || speakerName.touched)" class ="alert alert-danger">
+                <div *ngIf="speakerName.errors.required">
+                  Speaker Name is Required
+                </div>
+                <div *ngIf="speakerName.errors.minlength">
+                    Speaker Name Should be atleast 2 characters
+                </div>
+                <div *ngIf="speakerName.errors.pattern">
+                    Speaker Name Should contain only characters
+                </div>
+                </div>
+
+          </div>
+          <label for="designation">Enter Designation </label>
+          <input  type="text" [(ngModel)]="speaker.designation"  #designation="ngModel"  matInput type="text"  class="form-control" name="designation" minlength="2" pattern="([a-zA-Z]+\s)*[a-zA-Z]+"  placeholder="Enter Designation"  required>
+          <div *ngIf="designation.invalid && (designation.dirty || designation.touched)" class ="alert alert-danger">
+          <div *ngIf="designation.errors.required">
+           Designation is Required
+          </div>
+          <div *ngIf="designation.errors.minlength">
+              Designation Should be atleast 2 characters
+          </div>
+          <div *ngIf="designation.errors.pattern">
+              Designation Should contain only characters
+          </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input [(ngModel)]="contact.email" #email="ngModel" type="email" matInput class="form-control" name="email"
+               required  placeholder="Enter Email">
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class ="alert alert-danger">
+
+                <div *ngIf="email.errors.required">Email is required</div>
+
+        <div *ngIf="email.errors.email">
+            Email must be a valid email address
+        </div>
+        </div>
+          </div>
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input [(ngModel)]="contact.mobile" #mobile="ngModel" matInput require class="form-control" name="mobile" pattern="^((\\+91-?)|6)?[0-9]{10}$"
+             placeholder="Enter Mobile Number">
+
+             <div *ngIf ="mobile.invalid && (mobile.dirty || mobile.touched)" class="alert alert-danger">
+              <div *ngIf="mobile.errors.required">
+                  Mobile Number is required
+              </div>
+              <div *ngIf="mobile.errors.pattern">
+                  Please, Enter 10 digit Mobile Number
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="addressLine1">AddressLine1</label>
+            <input matInput [(ngModel)]="contact.addressLine1" #addressLine1="ngModel" type="text" required class="form-control"
+              name="addressLine1" pattern="^[#.0-9a-zA-Z\s,-]+$" minlength=3 placeholder="Enter AddressLine1">
+
+              <div *ngIf="addressLine1.invalid && (addressLine1.dirty || addressLine1.touched)" class ="alert alert-danger">
+                <div *ngIf="addressLine1.errors.required">
+                 AddressLine1 is Required
+                </div>
+                <div *ngIf="addressLine1.errors.minlength">
+                    Address Should be atleast 3 characters
+                </div>
+                <div *ngIf="addressLine1.errors.pattern">
+                    Address Should contain only characters
+                </div>
+                </div>
+
+          </div>
+          <div class="form-group">
+            <label for="addressLine2">AddressLine2</label>
+            <input matInput [(ngModel)]="contact.addressLine2" #addressLine2="ngModel" type="text"  required class="form-control"
+              name="addressLine2" pattern="^[#.0-9a-zA-Z\s,-]+$" minlength="3" placeholder="Enter AddressLine2 ">
+              <div *ngIf="addressLine2.invalid && (addressLine2.dirty || addressLine2.touched)" class ="alert alert-danger">
+                <div *ngIf="addressLine2.errors.required">
+                 AddressLine2 is Required
+                </div>
+                <div *ngIf="addressLine2.errors.minlength">
+                    Address Should be atleast  3 characters
+                </div>
+                <div *ngIf="addressLine2.errors.pattern">
+                    Address Should contain only characters
+                </div>
+                </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fblink">Fb Link</label>
+            <input [(ngModel)]="contact.fbLink" #fbLink="ngModel" type="text" matInput required class="form-control" pattern="https?://.+" name="fblink"
+              placeholder="Enter Fb Link">
+              <div *ngIf="fbLink.invalid && (fbLink.dirty || fbLink.touched)" class ="alert alert-danger">
+                <div *ngIf="fbLink.errors.required">
+                 FbLink is Required
+                </div>
+
+                <div *ngIf="fbLink.errors.pattern">
+                    Must be a valid site URL
+                </div>
+                </div>
+
+          </div>
+          <div class="form-group">
+            <label for="twitterlink">Twitter Link</label>
+            <input [(ngModel)]="contact.twitterLink" #url="ngModel" type="text" matInput required
+              class="form-control" name="twitterlink" pattern="https?://.+" placeholder="Enter Twitter Link">
+
+              <div *ngIf="url.invalid && (url.dirty || url.touched)" class ="alert alert-danger">
+
+                <div *ngIf="url.errors.required">
+                    TwitterLink is Required
+                </div>
+
+                <div *ngIf="url.errors.pattern">
+                   Must be a valid site URL
+                </div>
+                </div>
+          </div>
+
+          <div class="btn-group btn-group-toggle btn-lg btn-block" data-toggle="buttons">
+            <button type="button" class="btn btn-success" [disabled]="f.invalid && imagefileData==null"
+              (click)="addSpeaker()"> ADD </button>
+            <button type="reset" class="btn btn-secondary">RESET</button>
+          </div>
+        </fieldset>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

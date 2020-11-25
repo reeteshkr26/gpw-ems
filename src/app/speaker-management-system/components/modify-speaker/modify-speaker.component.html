@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<div fxLayoutAlign="center center" id="flex" [class.style_change]="style_variable">
+  <div class="alert alert-dismissible alert-success" *ngIf="updated">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Well done! Speaker Sucessfully Updated</strong>.
+  </div>
+  <div class="alert alert-dismissible alert-danger" *ngIf="errorOccurs">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> {{errorMsg}} and try submitting again.
+  </div>
+
+  <div *ngIf="loadData">
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loadData && previewUrl==null">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap! No Speaker found for this {{speakerId}} id</strong>.
+  </div>
+  <mat-card fxFlex="30" *ngIf="previewUrl!=null">
+    <mat-card-header>
+      <mat-card-title class="text-center">Update Speaker</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <form name="form" #f="ngForm" novalidate>
+
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label for="image">Speaker Image</label>
+            <input type="file" required class="form-control-file" name="speakerImage" accept="image/*"
+              aria-describedby="fileHelp" observeFiles [(ngModel)]="imagefileData" (change)="showPreview($event)" />
+            <small id="fileHelp" class="form-text text-muted">Select Only image file.</small>
+
+          </div>
+          <div class="image-preview mb-3 form-group" *ngIf="previewUrl && previewUrl !== ''" style="padding: 0%;">
+            <img mat-card-image [src]="previewUrl" class="responsive-image" />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label for="speakerName">Speaker Name</label>
+            <input [(ngModel)]="speaker.speakerName" #speakerName="ngModel" matInput required type="text"
+              class="form-control" name="speakerName" placeholder="Enter Speaker Name ">
+          </div>
+          <div class="form-group">
+            <label for="designation">Designation</label>
+            <input [(ngModel)]="speaker.designation" #designation="ngModel" matInput required class="form-control"
+              name="designation" rows="3" placeholder="Enter Designation">
+
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input [(ngModel)]="contact.email" #email="ngModel" type="text" matInput class="form-control" name="email"
+              id="email" minlength="7" pattern="[a-zA-Z]+" required rows="3" placeholder="Enter Email">
+
+          </div>
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input [(ngModel)]="contact.mobile" #mobile="ngModel" matInput require class="form-control" name="mobile"
+              rows="3" placeholder="Enter Mobile Number">
+          </div>
+
+          <div class="form-group">
+            <label for="addressLine1">AddressLine1</label>
+            <input [(ngModel)]="contact.addressLine1" #addressLine1="ngModel" matInput required class="form-control"
+              name="addressLine1" rows="3" placeholder="Enter AddressLine1">
+
+          </div>
+          <div class="form-group">
+            <label for="addressLine2">AddressLine2</label>
+            <input [(ngModel)]="contact.addressLine2" #addressLine2="ngModel" matInput required class="form-control"
+              name="addressLine2" rows="3" placeholder="Enter AddressLine2 ">
+
+          </div>
+
+          <div class="form-group">
+            <label for="fblink">Fb Link</label>
+            <input [(ngModel)]="contact.fbLink" #fbLink="ngModel" matInput required class="form-control" name="fblink"
+              rows="3" placeholder="Enter Fb Link">
+
+          </div>
+          <div class="form-group">
+            <label for="twitterlink">Twitter Link</label>
+            <input [(ngModel)]="contact.twitterLink" #twitterLink="ngModel" type="text" matInput required
+              class="form-control" name="twitterlink" rows="3" placeholder="Enter Twitter Link">
+
+          </div>
+
+
+
+
+          <div class="btn-group btn-group-toggle btn-lg btn-block" data-toggle="buttons">
+            <button type="button" class="btn btn-primary" (click)="modifySpeaker()" type="submit"> UPDATE </button>
+
+          </div>
+        </fieldset>
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

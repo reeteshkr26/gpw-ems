@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<div class="container" id="flex"  [class.style_change]="style_variable">
+  <div class="row" *ngIf="loadData">
+    <mat-spinner style="margin:0 auto;"
+    mode="indeterminate"></mat-spinner>
+  </div>
+  <div class="alert alert-dismissible alert-danger" *ngIf="errorOccurs">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Something Went wrong!</strong>.
+  </div>
+  <div class="row" *ngIf="event!=null">
+    <div class="col-8">
+      <div class="content" fxLayoutAlign="left center">
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="33%"  id="events">
+          <div class="mt-1 row">
+            <mat-card class="card">
+              <mat-card-header>
+                <mat-card-title>{{ event.eventTitle }}</mat-card-title>
+                <mat-card-subtitle>In : {{ event.eventCategory}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image *ngIf="eventImageInfo && eventImageInfo.length>0" src="{{eventImageInfo[0].fileUrl}}" alt="{{eventImageInfo[0].fileName}}">
+              <mat-card-content>
+                <p>
+                  {{event.eventDescription}}
+                </p>
+
+              </mat-card-content>
+                <youtube-player class="embed-responsive embed-responsive-16by9" videoId="{{event.eventVideoUrl}}"
+                 suggestedQuality="highres"
+                [height]="250"
+                [width]="500">
+              </youtube-player>
+              <mat-card-actions>
+                <div *ngIf="eventThoughtPaperInfo && eventThoughtPaperInfo.length>0">
+                  <a [href]="eventThoughtPaperInfo[0].fileUrl">View Thought Paper</a>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <mat-card class="card" *ngIf="schedule">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="speaker"><b>Speaker Details</b></label>
+            <mat-divider></mat-divider>
+            <mat-card-header>
+              <img mat-card-avatar class="example-header-image" src="{{scheduleEvent.speaker.speakerImage.imageUrl}}" >
+              <mat-card-title>{{scheduleEvent.speaker.speakerName}}</mat-card-title>
+              <mat-card-subtitle>{{scheduleEvent.speaker.designation}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-list role="list">
+                <mat-list-item role="listitem">
+                  <mat-icon mat-list-icon aria-hidden="false">email</mat-icon>
+                  <div mat-line>{{scheduleEvent.speaker.contact.email}}</div>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                  <mat-icon mat-list-icon aria-hidden="false">call</mat-icon>
+                  <div mat-line>{{scheduleEvent.speaker.contact.mobile}}</div>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                  <div>
+                    <a href="{{scheduleEvent.speaker.contact.fbLink}}"><mat-icon mat-list-icon aria-hidden="false">facebook</mat-icon></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                  <div>
+                    <a href="{{scheduleEvent.speaker.contact.twitterLink}}"><i class="fab fa-twitter left"></i></a>
+                  </div>
+
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              <label for="contact details" style="text-align: center;"><b>Event Venue Details</b></label>
+              <mat-divider></mat-divider>
+              <mat-list role="list">
+                <mat-list-item role="listitem">
+                  <mat-icon mat-list-icon aria-hidden="false">calendar_today</mat-icon>
+                  <div mat-line>{{scheduleEvent.startDateAndTime | date}}</div>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                  <mat-icon mat-list-icon aria-hidden="false">alarm</mat-icon>
+                  <div mat-line> 10:00 AM </div>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                  <mat-icon mat-list-icon aria-hidden="false">add_location</mat-icon>
+                  <div mat-line> {{ event.eventLcation }} </div>
+                </mat-list-item>
+            </mat-list>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions>
+              <button class="btn btn-primary btn-block btn-sm" type="button" (click)="openBookingPopup()">Registering Process</button>
+            </mat-card-actions>
+          </div>
+
+
+        </div>
+      </mat-card>
+      <div class="row" *ngIf="!loadData && !schedule">
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+          <div class="card-header">Scheduling Information</div>
+          <div class="card-body">
+            <h4 class="card-title">{{event.eventTitle}}</h4>
+            <p class="card-text">Sorry! No any Information About scheduling</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

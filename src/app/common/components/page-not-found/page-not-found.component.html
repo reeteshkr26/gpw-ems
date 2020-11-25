@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<div class="content" fxLayoutAlign="center center" id="flex"  [class.style_change]="style_variable">
+  <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+    <div class="card-header">Http Status 404</div>
+    <div class="card-body">
+      <h4 class="card-title">404 - Page Not Found</h4>
+      <p class="card-text" *ngIf="path">You might want to go to the <a [routerLink]="path">"{{ path }}" page</a></p>
+    </div>
+  </div>
+</div>
+

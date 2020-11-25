@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<div class="jumbotron text-center" fxLayoutAlign="center center" fxFlexFill id="flex"
+  [class.style_change]="style_variable" style="background-color: white;">
+  <div class="row" fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="33%" style="background-color: white;">
+    <div class="col-md-12">
+      <div *ngIf="loadData">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+      <div class="alert alert-dismissible alert-success" *ngIf="eventList.length==0 && !loadData">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>No Events Found!</strong>.
+      </div>
+      <div class="alert alert-dismissible alert-success" *ngIf="success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Event Delete Sucessfull!</strong>.
+      </div>
+      <div class="alert alert-dismissible alert-danger" *ngIf="deletionErr">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Deletion Error!</strong>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="eventList.length!=0">
+
+      <p id="desc">Event List</p>
+
+      <form class="form-inline">
+        <input class="form-control" name="searchInput" placeholder="Search" #searchInput="ngModel"
+          [(ngModel)]="searchText" style="width: 50%;">
+        <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
+      </form>
+      <table class="table table-hover">
+        <thead class="table-primary" aria-describedby="desc">
+          <tr>
+            <th>S.No</th>
+            <th >Event Id</th>
+            <th >Event Title</th>
+            <th >Event Category </th>
+            <th >Event Location </th>
+            <th >Event Schedule Status </th>
+            <th >Event Image</th>
+            <th >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of eventList |filter:searchText | paginate:{itemsPerPage:3,currentPage:p}; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{event.eventId}}</td>
+            <td>{{event.eventTitle}}</td>
+            <td>{{event.eventCategory}}</td>
+            <td>{{event.eventLcation}}</td>
+            <td>{{event.scheduleStatusCode}}</td>
+            <td>
+              <div><img mat-im src="{{imageFie[i].fileUrl}}" height="100" width="90" /></div>
+            </td>
+            <td>
+              <button (click)="deleteEvent(event)" class="btn btn-sm btn-danger">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button (click)="editEvent(event)" class="btn btn-primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+  </div>

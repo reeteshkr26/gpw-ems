@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<div class="jumbotron text-center" fxLayoutAlign="center center" fxFlexFill id="flex"
+  [class.style_change]="style_variable" style="background-color: white;">
+  <div class="row" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <div class="col-md-12">
+      <div *ngIf="loadData">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+      <div *ngIf="deletionStart">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+      <div class="alert alert-dismissible alert-success" *ngIf="speakerList.length==0 && !loadData">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>No Speakers Found!</strong>.
+      </div>
+      <div class="alert alert-dismissible alert-success" *ngIf="success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Speaker Delete Sucessfull!</strong>.
+      </div>
+      <div class="alert alert-dismissible alert-danger" *ngIf="deletionErr">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Deletion Error!</strong>.
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="speakerList.length!=0">
+      <p id="desc">Speakers List</p>
+      <form class="form-inline">
+        <input class="form-control" name="searchInput" placeholder="Search" #searchInput="ngModel"
+          [(ngModel)]="searchText" style="width: 50%;">
+        <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
+      </form>
+      <table class="table table-hover">
+        <thead>
+          <tr class="table-primary" aria-describedby="desc">
+            <th>S.No</th>
+            <th>Speaker Id</th>
+            <th>Speaker Name</th>
+            <th>Designation</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>AddressLine1</th>
+            <th>AddressLine2</th>
+            <th> FBLink</th>
+            <th> TwitterLink</th>
+            <th>Image</th>
+            <th>Action</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let speaker of speakerList |filter:searchText | paginate:{itemsPerPage:3,currentPage:p};let i=index">
+
+            <td>{{i+1}}</td>
+            <td>{{speaker.speakerId}}</td>
+            <td>{{speaker.speakerName}}</td>
+            <td>{{speaker.designation}}</td>
+            <td>{{speaker.contact.email}}</td>
+            <td>{{speaker.contact.mobile}}</td>
+            <td>{{speaker.contact.addressLine1}}</td>
+            <td>{{speaker.contact.addressLine2}}</td>
+            <td><a href="{{speaker.contact.fbLink}}">{{speaker.contact.fbLink}}</a></td>
+            <td><a href="{{speaker.contact.twitterLink}}">{{speaker.contact.twitterLink}}</a></td>
+            <td><img src="{{ speaker.speakerImage.imageUrl }}" height="100" width="90" /></td>
+
+
+
+            <td>
+              <button (click)="deleteSpeaker(speaker)" class="btn btn-sm btn-danger">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button (click)="goToModifyPage(speaker)" class="btn btn-primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+  </div>

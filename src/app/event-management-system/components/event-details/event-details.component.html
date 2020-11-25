@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>{{ eventItem.eventTitle }}</mat-card-title>
+    <mat-card-subtitle>IN: {{ eventItem.eventCategory}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{eventImageInfo[0].fileUrl}}" alt="{{eventImageInfo[0].fileName}}">
+  <mat-card-content>
+    <p>
+      {{eventItem.eventDescription | slice: 0:250}}...<a
+        [routerLink]="['/view-events',eventItem.eventId,eventItem.scheduleStatusCode]">more--></a>
+    </p>
+  </mat-card-content>
+  <youtube-player class="embed-responsive embed-responsive-16by9" videoId="{{eventItem.eventVideoUrl}}"
+    suggestedQuality="highres" [height]="250" [width]="500">
+  </youtube-player>
+  <mat-card-actions>
+    <button type="button" class="btn btn-link" (click)="goToEventDetailsPage()">MORE</button>
+
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<div class="container" [class.style_change]="style_variable">
+  <div *ngIf="loadData">
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+  </div>
+
+  <div class="alert alert-dismissible alert-danger" *ngIf="errorOccurs">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> {{errorMsg}} and try submitting again.
+  </div>
+  <div class="row" fxLayoutAlign="center center" *ngIf="profile!=null">
+
+    <div class="col">
+      <mat-card>
+
+        <mat-card-header>
+          <div class="row right-align">
+            <i class="material-icons edit-icon" (click)="openProfileImagePopUp()">edit</i>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content id="contentId">
+          <div class="profile" *ngIf="profile.profileImage.imageName!='demo'">
+            <img src="{{profile.profileImage.imageUrl}}" class="profile-image">
+          </div>
+          <div class="profile" *ngIf="profile.profileImage.imageName=='demo'">
+            <img src="assets/img/default-image.png" class="profile-image">
+          </div>
+        </mat-card-content>
+
+        <mat-card-footer>
+          <div class="profile">
+            <p>{{profile.profileName}}</p>
+          </div>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+
+
+
+  <div class="row" fxLayoutAlign="center center" style="padding-top: 1pc;" *ngIf="profile!=null">
+    <div class="col-4">
+      <mat-card class="card-color">
+        <mat-card-header>
+          <div class="about-card">
+            About Me!
+          </div>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div>
+            <br>
+            I am a very simple card. I am good at containing small
+            bits of information.
+            I am convenient because I
+            require little markup to use effectively.
+            <br>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-8">
+      <mat-card>
+        <mat-card-header>
+          <div class="row right-align">
+
+            <i class="material-icons edit-icon" (click)="openProfileContactDetailsPopUp()">edit</i>
+
+          </div>
+        </mat-card-header>
+
+        <mat-card-content >
+
+          <div class='row'>
+            <div class="col-2" id=col-center>
+              <i class="material-icons">mail</i>
+            </div>
+            <div class="col-8" id=col-left>
+              {{profile.contact.email}}
+            </div>
+          </div>
+          <div class='row'>
+            <div class="col-2" id=col-center>
+              <i class="material-icons">local_phone</i>
+
+            </div>
+            <div class="col-8">
+              {{profile.contact.mobile}}
+            </div>
+          </div>
+          <div class='row'>
+            <div class="col-2" id=col-center>
+              <i class="material-icons">home</i>
+            </div>
+            <div class="col-8">
+              {{profile.contact.addressline1}}
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class="col-2" id=col-center>
+              <i class="material-icons">location_on</i>
+            </div>
+            <div class="col-8">
+              {{profile.contact.addressline2}}
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class="col-2" id=col-center>
+              <i class="material-icons">facebook</i>
+            </div>
+            <div class="col-8">
+             <a href="{{profile.contact.fblink}}">{{profile.contact.fblink}}</a>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class="col-2" id=col-center>
+              <i class="fab fa-twitter left"></i>
+            </div>
+            <div class="col-8">
+             <a href="{{profile.contact.twitterLink}}">{{profile.contact.twitterLink}}</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-2" id="col-left"></div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>

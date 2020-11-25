@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<div fxLayoutAlign="center center" id="flex" [class.style_change]="style_variable">
+  <mat-card fxFlex="30">
+
+    <div class="alert alert-dismissible alert-success" *ngIf="success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Well done! Schedule Sucessfully created</strong>.
+    </div>
+    <div class="alert alert-dismissible alert-danger" *ngIf="errorOccurs">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Oh snap!</strong> {{errorMsg}} and try submitting again.
+    </div>
+    <mat-card-header>
+      <mat-card-title class="text-center">Add Schedule</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="!success && btnClick">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+
+      <form name="form" [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend></legend>
+        </fieldset>
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label for="scheduleTitle">Schedule Title</label>
+            <input matInput formControlName="scheduleTitle" type="text" class="form-control" name="scheduleTitle"
+              placeholder="Enter Event Title"
+              [class.is-invalid]="scheduleForm.get('scheduleTitle').invalid && scheduleForm.get('scheduleTitle').touched">
+            <div class="text-danger"
+              [class.d-none]="scheduleForm.get('scheduleTitle').valid || scheduleForm.get('scheduleTitle').untouched ">
+              Sorry, that Schedule Title is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="eventLocation">Location</label>
+
+            <select formControlName="location" name="location" class="form-control"
+              [class.is-invalid]="scheduleForm.get('location').invalid && scheduleForm.get('location').touched">
+              <option disabled selected value>Select Location</option>
+              <option *ngFor="let location of locationList" [value]="location">{{location}}</option>
+            </select>
+            <div class="text-danger"
+              [class.d-none]="scheduleForm.get('location').valid || scheduleForm.get('location').untouched ">
+              Sorry, that location is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="eventId">Event Id</label>
+
+            <select formControlName="eventId" name="eventId" class="form-control"
+              [class.is-invalid]="scheduleForm.get('eventId').invalid && scheduleForm.get('eventId').touched">
+              <option disabled selected value>Select Event</option>
+              <option *ngFor="let event of eventList" [value]="event.eventId">{{event.eventId}} - {{event.eventTitle}}
+              </option>
+            </select>
+            <div class="text-danger"
+              [class.d-none]="scheduleForm.get('eventId').valid || scheduleForm.get('eventId').untouched ">
+              Sorry, that event Id is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sId">Speaker Id</label>
+
+            <select formControlName="speakerId" name="speakerId" class="form-control"
+              [class.is-invalid]="scheduleForm.get('speakerId').invalid && scheduleForm.get('speakerId').touched">
+              <option disabled selected value>Select Speaker</option>
+              <option *ngFor="let Speaker of speakerList" [value]="Speaker.speakerId">{{Speaker.speakerName}} -
+                {{Speaker.speakerName}}</option>
+            </select>
+            <div class="text-danger"
+              [class.d-none]="scheduleForm.get('speakerId').valid || scheduleForm.get('speakerId').untouched ">
+              Sorry, that Speaker Id is required!
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="start">Start Date</label>
+            <input type="date" matInput formControlName="startDateAndTime" class="form-control" name="videoUrl"
+              placeholder="Enter Start Date"
+              [class.is-invalid]="scheduleForm.get('startDateAndTime').invalid && scheduleForm.get('startDateAndTime').touched">
+            <div class="text-danger"
+              [class.d-none]="scheduleForm.get('startDateAndTime').valid || scheduleForm.get('startDateAndTime').untouched ">
+              Sorry, that start date is required!
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="end">End Date</label>
+            <input type="date" matInput formControlName="endDateAndTime" class="form-control" name="endDateAndTime"
+              placeholder="Enter End Date"
+              [class.is-invalid]="scheduleForm.get('endDateAndTime').invalid && scheduleForm.get('endDateAndTime').touched">
+            <div class="text-danger"
+              [class.d-none]="scheduleForm.get('endDateAndTime').valid || scheduleForm.get('endDateAndTime').untouched ">
+              Sorry, that end date is required!
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="st">Total No. of Seats</label>
+            <input type="number" matInput formControlName="totalSeats" class="form-control" name="totalSeats"
+              placeholder="Enter Total Number of Seats"
+              [class.is-invalid]="scheduleForm.get('totalSeats').invalid && scheduleForm.get('totalSeats').touched">
+            <div class="text-danger"
+              [class.d-none]="scheduleForm.get('totalSeats').valid || scheduleForm.get('totalSeats').untouched ">
+              Sorry, that total number of seats are required!
+            </div>
+          </div>
+
+          <div class="btn-group btn-group-toggle btn-lg btn-block" data-toggle="buttons">
+            <button type="submit" class="btn btn-primary" [disabled]="scheduleForm.invalid">ADD</button>
+            <button type="reset" class="btn btn-secondary">RESET</button>
+          </div>
+        </fieldset>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

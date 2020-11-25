@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<div class="container" id="flex" [class.style_change]="style_variable">
+  <div class="row" *ngIf="loadData">
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+  </div>
+  <div class="row" *ngIf="searchButtonClick">
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+  </div>
+  <div class="alert alert-dismissible alert-success" *ngIf="eventsNotFound">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>No Events Found!</strong>.
+  </div>
+  <div class="alert alert-dismissible alert-success" *ngIf="eventList.length==0 && !loadData">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>No Events Found!</strong>.
+  </div>
+  <div class="row" *ngIf="eventList.length>0">
+    <div class="col-8">
+      <div class="content" fxLayoutAlign="left center">
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="33%" id="events">
+          <div class="mt-1 row" *ngFor="let event of eventViewList">
+            <app-event-details [eventItem]="event"></app-event-details>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card filters">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="search">Search By</label>
+            <select required name="search" class="form-control" (change)="selectChangeHandler($event)">
+              <option disabled selected value>Select an Option</option>
+              <option *ngFor="let option of searchByList" [value]="option.id">{{option.text}}</option>
+            </select>
+          </div>
+          <form *ngIf="searchByCategory">
+            <div class="form-group">
+              <label for="eventCategory">Select Event Category</label>
+              <select required [(ngModel)]="category" name="category" #cate="ngModel" class="form-control">
+                <option disabled selected value>Select Category</option>
+                <option *ngFor="let category of categoryList" [value]="category">{{category}}</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-block btn-sm" type="button"
+              (click)="cate.valid && searchByCategoryMethod()">Search by Category</button>
+          </form>
+          <form *ngIf="searchByLocation">
+            <div class="form-group">
+              <label for="eventLocation">Select Event Location</label>
+              <select required [(ngModel)]="location" name="location" #loc="ngModel" class="form-control">
+                <option disabled selected value>Select Location</option>
+                <option *ngFor="let location of locationList" [value]="location">{{location}}</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-block btn-sm" type="button"
+              (click)="loc.valid && searchByLocationMethod()">Search by Location</button>
+          </form>
+          <form *ngIf="searchByTitle">
+            <div class="form-group">
+              <label for="eventTitle">Event Title</label>
+              <input required type="text" [(ngModel)]="title" class="form-control" name="searchText" ngModel
+                #t="ngModel" placeholder="Enter your Text" />
+            </div>
+            <button class="btn btn-primary btn-block btn-sm" type="button"
+              (click)="t.valid && searchByName()">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

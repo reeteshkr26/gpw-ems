@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<div class="modal-dialog modal-lg" role="document">
+
+  <div class="row" *ngIf="loadData">
+    <mat-spinner style="margin:0 auto;"
+    mode="indeterminate"></mat-spinner>
+  </div>
+  <div class="alert alert-dismissible alert-danger" *ngIf="errorOccurs">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> {{errorMsg}} and try submitting again.
+  </div>
+  <div class="modal-content" *ngIf="previewUrl!=null">
+    <div class="modal-header">
+      <strong>
+        <h3 class="modal-title">Update Profile Image</h3>
+      </strong>
+      <button mat-dialog-close type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm">
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label for="image">Select Profile Image</label>
+            <input type="file" required class="form-control-file" name="profileImage" accept="image/*"
+              aria-describedby="fileHelp" #inputImageFile (change)="showPreview($event)" />
+            <small id="fileHelp" class="form-text text-muted">Select Only image file.</small>
+
+          </div>
+          <div class="image-preview mb-3 form-group" *ngIf="profile.profileImage.imageName=='demo' && previewUrl !== ''" style="padding: 0%;">
+            <img src="assets/img/default-image.png" height="250Px" width="200Px" class="responsive-image" />
+          </div>
+          <div class="image-preview mb-3 form-group" *ngIf="previewUrl && previewUrl !== '' && profile.profileImage.imageName!='demo'" style="padding: 0%;">
+            <img  [src]="previewUrl" height="300Px" width="300Px" class="responsive-image" />
+          </div>
+
+        <div class="modal-footer">
+          <button mat-flat-button color="accent" [disabled]="imagefileData==null"
+            (click)="updateImage()">UPDATE</button>
+        </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

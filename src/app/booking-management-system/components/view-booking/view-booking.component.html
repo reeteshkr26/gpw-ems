@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<div class="jumbotron text-center" fxLayoutAlign="center center" fxFlexFill id="flex"
+  [class.style_change]="style_variable" style="background-color: white;">
+  <div class="row" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <div class="col-md-12">
+      <div *ngIf="result" class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Booking Cancelled Successfully</strong>
+      </div>
+
+      <div *ngIf="loadData">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+
+      <div class="alert alert-dismissible alert-success" *ngIf="bookingList.length==0 && !loadData">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Booking List not Found!</strong>.
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card box mb-3" *ngIf="bookingList.length!=0">
+        <div class="card-body">
+          <h1 class="card-title" style="color: brown;" id="desc"><b>My Bookings</b></h1>
+
+          <table class="table table-hover">
+            <thead class="thead-dark" aria-describedby="desc">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Booking ID</th>
+                <th scope="col">Booking Date</th>
+                <th scope="col">Event ID</th>
+                <th scope="col">Event Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Cancel Booking</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let booking of bookingList; let i=index ">
+                <th scope="row">{{i+1}}</th>
+                <td>{{booking.bookingId}}</td>
+                <td>{{booking.bookingDate | date}}</td>
+                <td>{{booking.eventId}}</td>
+                <td>{{booking.event.eventTitle}}</td>
+                <td>{{booking.event.eventLcation}}</td>
+
+                <td *ngIf="booking.bookingStatus==1"><button class="btn btn-danger" data-toggle="modal"
+                    data-target="#cancelBooking">Cancel
+                    Booking</button></td>
+                <td *ngIf="booking.bookingStatus==2">CANCELED</td>
+
+                <div class="modal fade" id="cancelBooking" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" style="color: red;" id="exampleModalLabel">Cancel Booking</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are You Sure to cancel this booking?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="alert"
+                          (click)="cancelBooking(booking.bookingId)">Yes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

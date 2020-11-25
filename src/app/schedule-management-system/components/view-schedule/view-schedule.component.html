@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<div class="jumbotron text-center" fxLayoutAlign="center center" fxFlexFill id="flex"
+  [class.style_change]="style_variable" style="background-color: white;">
+  <div class="row" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <div class="col-md-12">
+      <div *ngIf="loadData">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+      <div *ngIf="deletionStart">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+      </div>
+      <div class="alert alert-dismissible alert-success" *ngIf="scheduleList.length==0 && !loadData">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Schdelule Info not Found!</strong>.
+      </div>
+      <div class="alert alert-dismissible alert-success" *ngIf="success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Schedule Delete Sucessfull!</strong>.
+      </div>
+      <div class="alert alert-dismissible alert-danger" *ngIf="deletionErr">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Deletion Error!</strong>.
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="scheduleList.length!=0">
+      <p id="desc">Schedule Details</p>
+      <form class="form-inline">
+        <input class="form-control" name="searchInput" placeholder="Search" #searchInput="ngModel"
+          [(ngModel)]="searchText" style="width: 50%;">
+        <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
+      </form>
+      <table class="table table-hover">
+        <thead>
+          <tr class="table-primary" aria-describedby="desc">
+            <th>S.No</th>
+            <th>Schedule Id</th>
+            <th>Schedule Title</th>
+            <th>Event Id</th>
+            <th>Event Title</th>
+            <th>Speaker Id</th>
+            <th>Speaker Name</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Available Seats</th>
+            <th>Action</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let schedule of scheduleList |filter:searchText | paginate:{itemsPerPage:3,currentPage:p};let i=index">
+
+            <td>{{i+1}}</td>
+            <td>{{schedule.speakerId}}</td>
+            <td>{{schedule.scheduleTitle}}</td>
+            <td>{{schedule.eventId}}</td>
+            <td>{{schedule.event.eventTitle}}</td>
+            <td>{{schedule.speakerId}}</td>
+            <td>{{schedule.speaker.speakerName}}</td>
+            <td>{{schedule.location}}</td>
+            <td>{{schedule.startDateAndTime | date}}</td>
+            <td>{{schedule.endDateAndTime | date}}</td>
+            <td>{{schedule.availableSeats}}</td>
+            <td>
+              <button (click)="deleteSchedule(schedule)" class="btn btn-sm btn-danger">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button (click)="goToModifyPage(schedule)" class="btn btn-primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+  </div>
