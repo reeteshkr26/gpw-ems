@@ -29,21 +29,21 @@
           [(ngModel)]="searchText" style="width: 50%;">
         <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
       </form>
-      <table class="table table-hover">
+      <table class="table table-hover" aria-describedby="desc">
         <thead>
-          <tr class="table-primary" aria-describedby="desc">
-            <th>S.No</th>
-            <th>Speaker Id</th>
-            <th>Speaker Name</th>
-            <th>Designation</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>AddressLine1</th>
-            <th>AddressLine2</th>
-            <th> FBLink</th>
-            <th> TwitterLink</th>
-            <th>Image</th>
-            <th>Action</th>
+          <tr class="table-primary">
+            <th scope="col">S.No</th>
+            <th scope="col">Speaker Id</th>
+            <th scope="col">Speaker Name</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">AddressLine1</th>
+            <th scope="col">AddressLine2</th>
+            <th scope="col">FBLink</th>
+            <th scope="col">witterLink</th>
+            <th scope="col">Image</th>
+            <th scope="col">Action</th>
 
           </tr>
         </thead>
@@ -62,7 +62,7 @@
             <td>{{speaker.contact.addressLine2}}</td>
             <td><a href="{{speaker.contact.fbLink}}">{{speaker.contact.fbLink}}</a></td>
             <td><a href="{{speaker.contact.twitterLink}}">{{speaker.contact.twitterLink}}</a></td>
-            <td><img src="{{ speaker.speakerImage.imageUrl }}" height="100" width="90" /></td>
+            <td><img src="{{ speaker.speakerImage.imageUrl }}" height="100" width="90" alt="no image"/></td>
 
 
 

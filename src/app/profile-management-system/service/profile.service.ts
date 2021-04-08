@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { ContactModel } from '../model/contact-model';
 import { ProfileModel } from '../model/profile-model';
 
@@ -13,7 +13,7 @@ export class ProfileService {
   baseUrl:string;
 
   constructor(private http:HttpClient) {
-    this.baseUrl=`${environment.baseMWUrl}/profile-service/api`;
+    this.baseUrl=`${environment.baseMWUrl}/profile-management-service/api`;
    }
 
    profileImageUpload(profileId:number,formData:FormData):Observable<any>{

@@ -140,7 +140,7 @@ h2:after {
 /* -------------------------------------------------------------------*/
 
 header {
-   background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url("/assets/img/people-festival.jpg");
+   background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url("/gpw-ems/assets/img/people-festival.jpg");
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -270,7 +270,7 @@ header {
 /* -------------------------------------------------------------------*/
 
 .section-testimonials {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.8)),url("/assets/img/back-customers.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.8)),url("/gpw-ems/assets/img/back-customers.jpg");
   background-size: cover;
   color: #fff;
   background-attachment: fixed;

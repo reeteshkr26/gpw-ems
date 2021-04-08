@@ -29,21 +29,21 @@
           [(ngModel)]="searchText" style="width: 50%;">
         <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
       </form>
-      <table class="table table-hover">
+      <table class="table table-hover"  aria-describedby="desc">
         <thead>
-          <tr class="table-primary" aria-describedby="desc">
-            <th>S.No</th>
-            <th>Schedule Id</th>
-            <th>Schedule Title</th>
-            <th>Event Id</th>
-            <th>Event Title</th>
-            <th>Speaker Id</th>
-            <th>Speaker Name</th>
-            <th>Location</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Total Available Seats</th>
-            <th>Action</th>
+          <tr class="table-primary">
+            <th scope="col">S.No</th>
+            <th scope="col">Schedule Id</th>
+            <th scope="col">Schedule Title</th>
+            <th scope="col">Event Id</th>
+            <th scope="col">Event Title</th>
+            <th scope="col">Speaker Id</th>
+            <th scope="col">Speaker Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Total Available Seats</th>
+            <th scope="col">Action</th>
 
           </tr>
         </thead>
@@ -52,7 +52,7 @@
           <tr
             *ngFor="let schedule of scheduleList |filter:searchText | paginate:{itemsPerPage:3,currentPage:p};let i=index">
 
-            <td>{{i+1}}</td>
+            <th scope="row">{{i+1}}</th>
             <td>{{schedule.speakerId}}</td>
             <td>{{schedule.scheduleTitle}}</td>
             <td>{{schedule.eventId}}</td>

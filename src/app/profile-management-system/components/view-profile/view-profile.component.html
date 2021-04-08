@@ -15,16 +15,16 @@
 
         <mat-card-header>
           <div class="row right-align">
-            <i class="material-icons edit-icon" (click)="openProfileImagePopUp()">edit</i>
+            <em class="material-icons edit-icon" (click)="openProfileImagePopUp()">edit</em>
           </div>
         </mat-card-header>
 
         <mat-card-content id="contentId">
           <div class="profile" *ngIf="profile.profileImage.imageName!='demo'">
-            <img src="{{profile.profileImage.imageUrl}}" class="profile-image">
+            <img src="{{profile.profileImage.imageUrl}}" class="profile-image" alt="no image">
           </div>
           <div class="profile" *ngIf="profile.profileImage.imageName=='demo'">
-            <img src="assets/img/default-image.png" class="profile-image">
+            <img src="assets/img/default-image.png" class="profile-image" alt="no image">
           </div>
         </mat-card-content>
 
@@ -66,7 +66,7 @@
         <mat-card-header>
           <div class="row right-align">
 
-            <i class="material-icons edit-icon" (click)="openProfileContactDetailsPopUp()">edit</i>
+            <em class="material-icons edit-icon" (click)="openProfileContactDetailsPopUp()">edit</em>
 
           </div>
         </mat-card-header>
@@ -75,7 +75,7 @@
 
           <div class='row'>
             <div class="col-2" id=col-center>
-              <i class="material-icons">mail</i>
+              <em class="material-icons">mail</em>
             </div>
             <div class="col-8" id=col-left>
               {{profile.contact.email}}
@@ -83,7 +83,7 @@
           </div>
           <div class='row'>
             <div class="col-2" id=col-center>
-              <i class="material-icons">local_phone</i>
+              <em class="material-icons">local_phone</em>
 
             </div>
             <div class="col-8">
@@ -92,7 +92,7 @@
           </div>
           <div class='row'>
             <div class="col-2" id=col-center>
-              <i class="material-icons">home</i>
+              <em class="material-icons">home</em>
             </div>
             <div class="col-8">
               {{profile.contact.addressline1}}
@@ -101,7 +101,7 @@
 
           <div class='row'>
             <div class="col-2" id=col-center>
-              <i class="material-icons">location_on</i>
+              <em class="material-icons">location_on</em>
             </div>
             <div class="col-8">
               {{profile.contact.addressline2}}
@@ -110,7 +110,7 @@
 
           <div class='row'>
             <div class="col-2" id=col-center>
-              <i class="material-icons">facebook</i>
+              <em class="material-icons">facebook</em>
             </div>
             <div class="col-8">
              <a href="{{profile.contact.fblink}}">{{profile.contact.fblink}}</a>
@@ -119,7 +119,7 @@
 
           <div class='row'>
             <div class="col-2" id=col-center>
-              <i class="fab fa-twitter left"></i>
+              <em class="fab fa-twitter left"></em>
             </div>
             <div class="col-8">
              <a href="{{profile.contact.twitterLink}}">{{profile.contact.twitterLink}}</a>

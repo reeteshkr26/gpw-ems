@@ -30,10 +30,10 @@
 
           </div>
           <div class="image-preview mb-3 form-group" *ngIf="profile.profileImage.imageName=='demo' && previewUrl !== ''" style="padding: 0%;">
-            <img src="assets/img/default-image.png" height="250Px" width="200Px" class="responsive-image" />
+            <img src="assets/img/default-image.png" height="250Px" width="200Px" class="responsive-image" alt="no image"/>
           </div>
           <div class="image-preview mb-3 form-group" *ngIf="previewUrl && previewUrl !== '' && profile.profileImage.imageName!='demo'" style="padding: 0%;">
-            <img  [src]="previewUrl" height="300Px" width="300Px" class="responsive-image" />
+            <img  [src]="previewUrl" height="300Px" width="300Px" class="responsive-image" alt="no image"/>
           </div>
 
         <div class="modal-footer">

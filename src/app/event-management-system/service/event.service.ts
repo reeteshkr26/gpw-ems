@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
-import { environment } from "src/environments/environment";
+import { environment } from 'src/environments/environment.prod';
 import { EventModel } from "../model/event-model";
 import { UpdateRequest } from "../model/update-request";
 

@@ -28,29 +28,29 @@
           [(ngModel)]="searchText" style="width: 50%;">
         <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
       </form>
-      <table class="table table-hover">
-        <thead class="table-primary" aria-describedby="desc">
+      <table class="table table-hover" aria-describedby="desc">
+        <thead class="table-primary" >
           <tr>
-            <th>S.No</th>
-            <th >Event Id</th>
-            <th >Event Title</th>
-            <th >Event Category </th>
-            <th >Event Location </th>
-            <th >Event Schedule Status </th>
-            <th >Event Image</th>
-            <th >Action</th>
+            <th scope="col">S.No</th>
+            <th scope="col">Event Id</th>
+            <th scope="col">Event Title</th>
+            <th scope="col">Event Category </th>
+            <th scope="col">Event Location </th>
+            <th scope="col">Event Schedule Status </th>
+            <th scope="col">Event Image</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let event of eventList |filter:searchText | paginate:{itemsPerPage:3,currentPage:p}; let i=index">
-            <td>{{i+1}}</td>
+            <th scope="row">{{i+1}}</th>
             <td>{{event.eventId}}</td>
             <td>{{event.eventTitle}}</td>
             <td>{{event.eventCategory}}</td>
             <td>{{event.eventLcation}}</td>
             <td>{{event.scheduleStatusCode}}</td>
             <td>
-              <div><img mat-im src="{{imageFie[i].fileUrl}}" height="100" width="90" /></div>
+              <div><img mat-im src="{{imageFie[i].fileUrl}}" height="100" width="90" alt="no image"/></div>
             </td>
             <td>
               <button (click)="deleteEvent(event)" class="btn btn-sm btn-danger">

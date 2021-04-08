@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.btnClick=true;
     this.submitted = true;
-    this.model.username = this.f.username.value,
-    this.model.password = this.f.password.value
+    this.model.username = this.f.username.value;
+    this.model.password = this.f.password.value;
 
 
     this.authService.login(this.model).subscribe(
